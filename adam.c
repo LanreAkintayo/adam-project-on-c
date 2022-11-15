@@ -5,9 +5,9 @@
 #include <regex.h>
 
 int getCaseLength(){
-    int noOfScenarios;
+    int noOfCases;
 
-    FILE *fp = fopen("Adam.in", "r");
+    FILE *fp = fopen("Adam.in", "r" );
     
     // Checking if fp, the pointer to the file returns null.
       if(fp == NULL) {
@@ -19,19 +19,16 @@ int getCaseLength(){
      // This code won't work on Windows 
      char *line = NULL;
      size_t len = 0;
-    int counter = 0;
-
-    // malloc(sizeof(int))
 
     // Getting the first line containing no of scenarios 
     // and storing it in a variable
     if(getline(&line, &len, fp) != -1) {
-        noOfScenarios = atoi(line);
+        noOfCases = atoi(line);
     }
   
     fclose(fp);
     free(line); 
-    return noOfScenarios;
+    return noOfCases;
     
 
 }
@@ -41,6 +38,7 @@ int checkScenarioValidity(char scenario[]) {
     regex_t expression;
     
     result = regcomp( &expression, "[^udUD]", 0);
+
  
     result = regexec( &expression, scenario,
                     0, NULL, 0);
@@ -48,7 +46,7 @@ int checkScenarioValidity(char scenario[]) {
     return result;
 }
 
-void readScenarios(int noOfScenarios, char (*scenarios)[100]){
+void readScenarios(int noOfCases, char (*scenarios)[100]){
 
     FILE *fp = fopen("Adam.in", "r");
       if(fp == NULL) {
@@ -77,9 +75,9 @@ void readScenarios(int noOfScenarios, char (*scenarios)[100]){
             strcpy(scenarios[counter], line); 
         }
 
-        if (counter == noOfScenarios){
+        if (counter == noOfCases){
             break;
-        }
+        }-
 
         counter++;
     }
@@ -110,8 +108,8 @@ int getNoOfSteps(char scenario[]){
     return counter;
 }
 
-void displayResult(int noOfScenarios, char (*scenarios)[100]){
-     for (int i = 0; i < noOfScenarios; i++){
+void displayResult(int noOfCases, char (*scenarios)[100]){
+     for (int i = 0; i < noOfCases; i++){
         int noOfSteps = getNoOfSteps(scenarios[i]);
         int result = checkScenarioValidity(scenarios[i]);
 
@@ -125,15 +123,14 @@ void displayResult(int noOfScenarios, char (*scenarios)[100]){
 }
 
 int main(){
-    int noOfScenarios = getCaseLength();
+    int noOfCases = getCaseLength();
 
 
-    char scenarios[noOfScenarios][100];
-    int noOfSteps[noOfScenarios];
+    char scenarios[noOfCases][100];
 
-    readScenarios(noOfScenarios, scenarios);
+    readScenarios(noOfCases, scenarios);
 
-    displayResult(noOfScenarios, scenarios);
+    displayResult(noOfCases, scenarios);
 
    
 
