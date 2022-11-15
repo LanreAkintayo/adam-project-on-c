@@ -33,14 +33,14 @@ int getCaseLength(){
 
 }
 
-int checkCaseValidity(char scenario[]) {
+int checkCaseValidity(char _case[]) {
     int result;
     regex_t expression;
     
     result = regcomp( &expression, "[^udUD]", 0);
 
  
-    result = regexec( &expression, scenario,
+    result = regexec( &expression, _case,
                     0, NULL, 0);
 
     return result;
@@ -86,18 +86,18 @@ void readCases(int noOfCases, char (*cases)[100]){
     free(line);     
 }
 
-int getNoOfSteps(char scenario[]){
+int getNoOfSteps(char _case[]){
     int counter = 0;   
 
-    int result = checkCaseValidity(scenario);
+    int result = checkCaseValidity(_case);
 
     if (result == 0){
         counter = -1;
         return counter;
     }
 
-    for (int i = 0; i < strlen(scenario); i++){
-        char currentChar = scenario[i];
+    for (int i = 0; i < strlen(_case); i++){
+        char currentChar = _case[i];
 
         if (toupper(currentChar) == 68){
             break;
