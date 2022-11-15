@@ -33,7 +33,7 @@ int getCaseLength(){
 
 }
 
-int checkScenarioValidity(char scenario[]) {
+int checkCaseValidity(char scenario[]) {
     int result;
     regex_t expression;
     
@@ -89,7 +89,7 @@ void readCases(int noOfCases, char (*cases)[100]){
 int getNoOfSteps(char scenario[]){
     int counter = 0;   
 
-    int result = checkScenarioValidity(scenario);
+    int result = checkCaseValidity(scenario);
 
     if (result == 0){
         counter = -1;
@@ -111,7 +111,7 @@ int getNoOfSteps(char scenario[]){
 void displayResult(int noOfCases, char (*cases)[100]){
      for (int i = 0; i < noOfCases; i++){
         int noOfSteps = getNoOfSteps(cases[i]);
-        int result = checkScenarioValidity(cases[i]);
+        int result = checkCaseValidity(cases[i]);
 
         if (result == 0){
             printf("\nInvalid steps found in: %s. Step can either be 'U' or 'D'", cases[i]);
