@@ -20,7 +20,7 @@ int getCaseLength(){
      char *line = NULL;
      size_t len = 0;
 
-    // Getting the first line containing no of scenarios 
+    // Getting the first line containing no of cases 
     // and storing it in a variable
     if(getline(&line, &len, fp) != -1) {
         noOfCases = atoi(line);
@@ -46,7 +46,7 @@ int checkScenarioValidity(char scenario[]) {
     return result;
 }
 
-void readScenarios(int noOfCases, char (*scenarios)[100]){
+void readCases(int noOfCases, char (*cases)[100]){
 
     FILE *fp = fopen("Adam.in", "r");
       if(fp == NULL) {
@@ -68,11 +68,11 @@ void readScenarios(int noOfCases, char (*scenarios)[100]){
         if (counter == 0){
             if(getline(&line, &len, fp) != -1){
                 line[strcspn(line, "\n")] = 0;
-                strcpy(scenarios[counter], line); 
+                strcpy(cases[counter], line); 
             } 
         } else{
             line[strcspn(line, "\n")] = 0;
-            strcpy(scenarios[counter], line); 
+            strcpy(cases[counter], line); 
         }
 
         if (counter == noOfCases){
@@ -108,15 +108,15 @@ int getNoOfSteps(char scenario[]){
     return counter;
 }
 
-void displayResult(int noOfCases, char (*scenarios)[100]){
+void displayResult(int noOfCases, char (*cases)[100]){
      for (int i = 0; i < noOfCases; i++){
-        int noOfSteps = getNoOfSteps(scenarios[i]);
-        int result = checkScenarioValidity(scenarios[i]);
+        int noOfSteps = getNoOfSteps(cases[i]);
+        int result = checkScenarioValidity(cases[i]);
 
         if (result == 0){
-            printf("\nInvalid steps found in: %s. Step can either be 'U' or 'D'", scenarios[i]);
+            printf("\nInvalid steps found in: %s. Step can either be 'U' or 'D'", cases[i]);
         }else{
-            printf("\nNo of steps for %s is %d", scenarios[i], noOfSteps);
+            printf("\nNo of steps for %s is %d", cases[i], noOfSteps);
         }
         }
 
@@ -126,11 +126,11 @@ int main(){
     int noOfCases = getCaseLength();
 
 
-    char scenarios[noOfCases][100];
+    char cases[noOfCases][100];
 
-    readScenarios(noOfCases, scenarios);
+    readCases(noOfCases, cases);
 
-    displayResult(noOfCases, scenarios);
+    displayResult(noOfCases, cases);
 
    
 
